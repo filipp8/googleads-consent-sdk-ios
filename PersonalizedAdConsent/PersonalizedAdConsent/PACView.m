@@ -211,10 +211,13 @@ static NSDictionary<NSString *, NSString *> *_Nonnull PACQueryParametersFromURL(
   }
  
   NSURL *URL = [resourceBundle URLForResource:@"consentform" withExtension:@"html"];
-  NSLocale *currentLocale = [NSLocale currentLocale];
-  NSString *localeIdentifier = [[currentLocale.localeIdentifier componentsSeparatedByString:@"_"] firstObject];
-  NSString *fileName = [@"consentform" stringByAppendingFormat:@"_%@", localeIdentifier];
+//  NSLocale *currentLocale = [NSLocale currentLocale];
+//  NSString *localeIdentifier = [[currentLocale.localeIdentifier componentsSeparatedByString:@"_"] firstObject];
+//  NSString *fileName = [@"consentform" stringByAppendingFormat:@"_%@", localeIdentifier];
+    NSString *localeID = NSLocale.preferredLanguages.firstObject;
+    NSString *fileName = [@"consentform" stringByAppendingFormat:@"_%@", [[localeID componentsSeparatedByString:@"-"] firstObject]];
   NSURL *localeURL = [resourceBundle URLForResource:fileName withExtension:@"html"];
+  
   if (localeURL) {
       URL = localeURL;
   }
